@@ -1,0 +1,10 @@
+[project]
+name = "auto_alert_bot"
+version = "0.1.0"
+description = "A self-hosted bot to scrape and notify about vehicle listings from European sites."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+dependencies = ["requests>=2.32.5", "beautifulsoup4>=4.14.2"]
+
+[tool.uv]
