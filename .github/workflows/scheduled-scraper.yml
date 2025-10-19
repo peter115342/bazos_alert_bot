@@ -6,6 +6,10 @@ on:
     - cron: "0 7,13,19 * * *" # Winter time schedule
   workflow_dispatch:
 
+permissions:
+  actions: read
+  contents: read
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
