@@ -36,7 +36,7 @@ jobs:
           name: listings-db
           path: data
         continue-on-error: true
-        
+
       - name: Check database status
         run: |
           if [ -f data/listings.db ]; then
