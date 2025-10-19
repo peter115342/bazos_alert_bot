@@ -31,11 +31,13 @@ jobs:
         run: mkdir -p data
 
       - name: Download previous database (if exists)
-        uses: actions/download-artifact@v4
+        uses: dawidd6/action-download-artifact@v6
         with:
           name: listings-db
           path: data
-        continue-on-error: true
+          workflow: scheduled-scraper.yml
+          workflow_conclusion: success
+          if_no_artifact_found: ignore
 
       - name: Check database status
         run: |
@@ -64,12 +66,12 @@ jobs:
           fi
 
       - name: Upload database
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: listings-db
           path: data/listings.db
           retention-days: 90
-        continue-on-error: true
 
       - name: Upload status check
         if: failure()
