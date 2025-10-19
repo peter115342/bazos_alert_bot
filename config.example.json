@@ -1,0 +1,26 @@
+{
+  "discord_webhook_url": "https://discord.com/api/webhooks/YOUR_WEBHOOK_ID/YOUR_WEBHOOK_TOKEN",
+  "check_interval_minutes": 15,
+  "database_path": "./data/listings.db",
+  "searches": [
+    {
+      "name": "Audi A4 under 20k EUR",
+      "source": "bazos_sk",
+      "url": "https://auto.bazos.sk/audi/?hledat=A4&rubriky=auto&hlokalita=&humkreis=25&cenaod=&cenado=20000&Submit=Hľadať&order=&crp=&kitx=ano"
+    },
+    {
+      "name": "BMW 3 Series",
+      "source": "bazos_sk",
+      "search_term": "BMW 3",
+      "price_max": "15000"
+    },
+    {
+      "name": "Skoda Octavia in Bratislava",
+      "source": "bazos_sk",
+      "search_term": "Skoda Octavia",
+      "price_max": "10000",
+      "location": "Bratislava",
+      "radius": "50"
+    }
+  ]
+}

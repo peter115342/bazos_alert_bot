@@ -1,0 +1,51 @@
+name: Scheduled Bazos Scraper
+
+on:
+  schedule:
+    # Run at 8:00, 14:00, and 20:00 Central European Time (UTC+1)
+    - cron: "0 7,13,19 * * *" # Winter time schedule
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Create data directory
+        run: mkdir -p data
+
+      - name: Download previous database (if exists)
+        uses: actions/download-artifact@v4
+        with:
+          name: listings-db
+          path: data
+        continue-on-error: true
+
+      - name: Run scraper
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          RUN_MODE: once
+        run: uv run python -m src.main
+
+      - name: Upload database
+        uses: actions/upload-artifact@v4
+        with:
+          name: listings-db
+          path: data/listings.db
+          retention-days: 400

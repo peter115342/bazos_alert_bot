@@ -209,3 +209,13 @@ __marimo__/
 .vscode/
 
 project.md
+
+# Auto Alert Bot specific
+data/
+*.db
+*.db-journal
+
+html_samples/
+
+context/
+config.json

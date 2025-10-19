@@ -1,0 +1,12 @@
+services:
+  bot:
+    build: .
+    container_name: auto_alert_bot
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+      - ./config.json:/app/config.json:ro
+    environment:
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - RUN_MODE=continuous
+      - PYTHONUNBUFFERED=1
