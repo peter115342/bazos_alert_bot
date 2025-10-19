@@ -1,5 +1,5 @@
-import sqlite3
 import logging
+import sqlite3
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -25,6 +25,12 @@ class ListingDatabase:
                     title TEXT,
                     url TEXT,
                     price TEXT,
+                    image_url TEXT,
+                    description TEXT,
+                    location TEXT,
+                    category TEXT,
+                    date_posted TEXT,
+                    view_count INTEGER,
                     first_seen TIMESTAMP NOT NULL,
                     last_checked TIMESTAMP NOT NULL
                 )
@@ -74,6 +80,12 @@ class ListingDatabase:
         title: Optional[str] = None,
         url: Optional[str] = None,
         price: Optional[str] = None,
+        image_url: Optional[str] = None,
+        description: Optional[str] = None,
+        location: Optional[str] = None,
+        category: Optional[str] = None,
+        date_posted: Optional[str] = None,
+        view_count: Optional[int] = None,
     ) -> bool:
         """
         Add a new listing to the database.
@@ -84,6 +96,12 @@ class ListingDatabase:
             title: Vehicle title
             url: Listing URL
             price: Vehicle price
+            image_url: URL to listing image
+            description: Listing description
+            location: Location of the listing
+            category: Category of the listing
+            date_posted: Date when listing was posted
+            view_count: Number of views
 
         Returns:
             True if added successfully, False if already exists
@@ -98,10 +116,26 @@ class ListingDatabase:
             cursor = conn.cursor()
             cursor.execute(
                 """
-                INSERT INTO listings (id, source, title, url, price, first_seen, last_checked)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO listings 
+                (id, source, title, url, price, image_url, description, location, 
+                 category, date_posted, view_count, first_seen, last_checked)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
-                (listing_id, source, title, url, price, now, now),
+                (
+                    listing_id,
+                    source,
+                    title,
+                    url,
+                    price,
+                    image_url,
+                    description,
+                    location,
+                    category,
+                    date_posted,
+                    view_count,
+                    now,
+                    now,
+                ),
             )
             conn.commit()
             logger.info(f"Added new listing {listing_id} from {source}")

@@ -51,16 +51,10 @@ class DiscordNotifier:
         fields = []
 
         if price:
-            fields.append({"name": "💰 Price", "value": price, "inline": True})
-
-        if year:
-            fields.append({"name": "📅 Year", "value": year, "inline": True})
-
-        if mileage:
-            fields.append({"name": "🛣️ Mileage", "value": mileage, "inline": True})
+            fields.append({"name": "Price", "value": price, "inline": True})
 
         if location:
-            fields.append({"name": "📍 Location", "value": location, "inline": True})
+            fields.append({"name": "Location", "value": location, "inline": True})
 
         embed = {
             "title": title,

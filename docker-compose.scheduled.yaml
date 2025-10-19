@@ -1,0 +1,34 @@
+# Docker Compose for Scheduled Runs (3 times a day)
+# Uses cron inside container to run at 8 AM, 2 PM, and 8 PM
+
+services:
+  bot:
+    build: .
+    container_name: auto_alert_bot_scheduled
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+      - ./config.json:/app/config.json:ro
+    environment:
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - RUN_MODE=once
+      - PYTHONUNBUFFERED=1
+      - TZ=Europe/Bratislava
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - |
+        apt-get update && apt-get install -y cron
+        
+        # Create cron job - runs at 8:00, 14:00, and 20:00 every day
+        echo "0 8,14,20 * * * cd /app && uv run python -m src.main >> /app/data/cron.log 2>&1" > /etc/cron.d/bazos-scraper
+        
+        chmod 0644 /etc/cron.d/bazos-scraper
+        
+        crontab /etc/cron.d/bazos-scraper
+        
+        touch /app/data/cron.log
+        
+        cd /app && uv run python -m src.main
+        
+        cron -f

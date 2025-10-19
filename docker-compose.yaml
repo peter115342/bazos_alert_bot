@@ -3,9 +3,10 @@ services:
     build: .
     container_name: auto_alert_bot
     restart: unless-stopped
-    env_file:
-      - .env
     volumes:
       - ./data:/app/data
+      - ./config.json:/app/config.json:ro
     environment:
-      - DB_PATH=/app/data/listings.db
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - RUN_MODE=continuous
+      - PYTHONUNBUFFERED=1

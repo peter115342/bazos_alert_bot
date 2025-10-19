@@ -214,3 +214,8 @@ project.md
 data/
 *.db
 *.db-journal
+
+html_samples/
+
+context/
+config.json

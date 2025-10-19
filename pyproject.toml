@@ -5,6 +5,6 @@ description = "A self-hosted bot to scrape and notify about vehicle listings fro
 readme = "README.md"
 requires-python = ">=3.11"
 license = { file = "LICENSE" }
-dependencies = ["requests>=2.32.5", "beautifulsoup4>=4.14.2"]
+dependencies = ["requests>=2.32.5", "beautifulsoup4>=4.14.2", "lxml>=5.0.0"]
 
 [tool.uv]
