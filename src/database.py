@@ -32,7 +32,8 @@ class ListingDatabase:
                     date_posted TEXT,
                     view_count INTEGER,
                     first_seen TIMESTAMP NOT NULL,
-                    last_checked TIMESTAMP NOT NULL
+                    last_checked TIMESTAMP NOT NULL,
+                    notified BOOLEAN NOT NULL DEFAULT 0
                 )
             """)
 
@@ -40,6 +41,17 @@ class ListingDatabase:
                 CREATE INDEX IF NOT EXISTS idx_source 
                 ON listings(source)
             """)
+
+            cursor.execute("""
+                SELECT COUNT(*) FROM pragma_table_info('listings') 
+                WHERE name='notified'
+            """)
+            if cursor.fetchone()[0] == 0:
+                cursor.execute("""
+                    ALTER TABLE listings 
+                    ADD COLUMN notified BOOLEAN NOT NULL DEFAULT 0
+                """)
+                logger.info("Added 'notified' column to existing database")
 
             conn.commit()
             logger.info(f"Database initialized at {self.db_path}")
@@ -118,8 +130,8 @@ class ListingDatabase:
                 """
                 INSERT INTO listings 
                 (id, source, title, url, price, image_url, description, location, 
-                 category, date_posted, view_count, first_seen, last_checked)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                 category, date_posted, view_count, first_seen, last_checked, notified)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
                 (
                     listing_id,
@@ -135,6 +147,7 @@ class ListingDatabase:
                     view_count,
                     now,
                     now,
+                    0,
                 ),
             )
             conn.commit()
@@ -184,6 +197,47 @@ class ListingDatabase:
 
             result = cursor.fetchone()
             return result[0] if result else 0
+
+    def is_listing_notified(self, listing_id: str, source: str = "mobile_de") -> bool:
+        """
+        Check if a listing has already been notified.
+
+        Args:
+            listing_id: Unique identifier for the listing
+            source: Source platform
+
+        Returns:
+            True if listing has been notified, False otherwise
+        """
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT notified FROM listings WHERE id = ? AND source = ?",
+                (listing_id, source),
+            )
+            result = cursor.fetchone()
+            return result is not None and bool(result[0])
+
+    def mark_as_notified(self, listing_id: str, source: str = "mobile_de"):
+        """
+        Mark a listing as notified.
+
+        Args:
+            listing_id: Unique identifier for the listing
+            source: Source platform
+        """
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                UPDATE listings 
+                SET notified = 1
+                WHERE id = ? AND source = ?
+            """,
+                (listing_id, source),
+            )
+            conn.commit()
+            logger.debug(f"Marked listing {listing_id} as notified")
 
     def cleanup_old_listings(self, days: int = 30, source: Optional[str] = None):
         """

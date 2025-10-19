@@ -45,7 +45,12 @@ class AutoAlertBot:
                     date_posted=listing.date_posted,
                     view_count=listing.view_count,
                 )
+            else:
+                self.database.update_last_checked(listing.listing_id, listing.source)
 
+            if not self.database.is_listing_notified(
+                listing.listing_id, listing.source
+            ):
                 self.notifier.send_vehicle_notification(
                     title=listing.title,
                     url=listing.url,
@@ -55,13 +60,11 @@ class AutoAlertBot:
                     location=listing.location,
                     image_url=listing.image_url,
                     description=listing.description,
-                    color=0xF16400,  # Bazos orange
+                    color=0xF16400,
                 )
-
+                self.database.mark_as_notified(listing.listing_id, listing.source)
                 new_count += 1
                 logger.info(f"New listing notified: {listing.title}")
-            else:
-                self.database.update_last_checked(listing.listing_id, listing.source)
 
         if new_count > 0:
             logger.info(f"Processed {len(listings)} listings, {new_count} were new")
