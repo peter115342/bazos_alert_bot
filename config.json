@@ -1,0 +1,13 @@
+{
+  "discord_webhook_url": "",
+  "check_interval_minutes": 480,
+  "database_path": "./data/listings.db",
+  "searches": [
+    {
+      "name": "Audi A4 5000-20000 EUR",
+      "source": "bazos_sk",
+      "url": "https://auto.bazos.sk/audi/?hledat=A4&cenaod=5000&cenado=20000&order=4",
+      "max_pages": 3
+    }
+  ]
+}
