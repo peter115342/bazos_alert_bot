@@ -12,7 +12,13 @@
     {
       "name": "Twingo RS",
       "source": "bazos_sk",
-      "url": "https://auto.bazos.sk/renualt/?hledat=Twingo+RS&cenaod=2000&cenado=15000&order=4",
+      "url": "https://auto.bazos.sk/renault/?hledat=Twingo+RS&cenaod=2000&cenado=15000&order=4",
+      "max_pages": 3
+    },
+    {
+      "name": "Volvo C30",
+      "source": "bazos_sk",
+      "url": "https://auto.bazos.sk/volvo/?hledat=C30&cenaod=2000&cenado=15000&order=4",
       "max_pages": 3
     }
   ]
