@@ -43,31 +43,11 @@ jobs:
           workflow_conclusion: success
           if_no_artifact_found: ignore
 
-      - name: Check database status
-        run: |
-          if [ -f data/listings.db ]; then
-            echo "✓ Database restored successfully"
-            ls -lh data/listings.db
-          else
-            echo "⚠ No existing database found - starting fresh"
-            echo "Note: All listings will be saved but only NEW ones will be notified"
-          fi
-
       - name: Run scraper
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           RUN_MODE: once
         run: uv run python -m src.main
-
-      - name: Verify database before upload
-        run: |
-          if [ -f data/listings.db ]; then
-            echo "✓ Database file exists"
-            echo "Database size: $(du -h data/listings.db | cut -f1)"
-            echo "Record count: $(sqlite3 data/listings.db 'SELECT COUNT(*) FROM listings')"
-          else
-            echo "⚠ Warning: Database file not found!"
-          fi
 
       - name: Upload database
         if: always()
@@ -76,9 +56,3 @@ jobs:
           name: listings-db
           path: data/listings.db
           retention-days: 90
-
-      - name: Upload status check
-        if: failure()
-        run: |
-          echo "Database upload may have failed"
-          echo "This is not critical - the notified flag prevents duplicate notifications"
