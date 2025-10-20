@@ -64,7 +64,10 @@ class DiscordNotifier:
         }
 
         if description:
-            embed["description"] = description
+            desc = description
+            if len(desc) > 200 and not desc.endswith("..."):
+                desc = desc[:200].rstrip() + "..."
+            embed["description"] = desc
 
         if image_url:
             embed["thumbnail"] = {"url": image_url}

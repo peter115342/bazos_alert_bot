@@ -232,7 +232,10 @@ class BazosScraper(BaseScraper):
         description = None
         desc_elem = div.find("div", class_="popis")
         if desc_elem:
-            description = desc_elem.get_text(strip=True)[:200]
+            raw_desc = desc_elem.get_text(" ", strip=True)
+            description = raw_desc
+            if len(description) > 200:
+                description = description[:200].rstrip() + "..."
 
         price = "N/A"
         location = None
