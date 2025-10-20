@@ -4,9 +4,15 @@
   "database_path": "./data/listings.db",
   "searches": [
     {
-      "name": "Audi A4 5000-20000 EUR",
+      "name": "Fiat Panda",
       "source": "bazos_sk",
-      "url": "https://auto.bazos.sk/audi/?hledat=A4&cenaod=5000&cenado=20000&order=4",
+      "url": "https://auto.bazos.sk/fiat/?hledat=Panda&cenaod=2000&cenado=15000&order=4",
+      "max_pages": 3
+    },
+    {
+      "name": "Twingo RS",
+      "source": "bazos_sk",
+      "url": "https://auto.bazos.sk/renualt/?hledat=Twingo+RS&cenaod=2000&cenado=15000&order=4",
       "max_pages": 3
     }
   ]
