@@ -13,18 +13,9 @@ logger = logging.getLogger(__name__)
 
 
 class BazosScraper(BaseScraper):
-    """Scraper for Bazos.sk and Bazos.cz vehicle listings."""
-
-    BASE_URLS = {
-        "bazos_sk": "https://auto.bazos.sk",
-        "bazos_cz": "https://auto.bazos.cz",
-    }
-
     def __init__(self, source_name: str):
         super().__init__(source_name)
-        self.base_url = self.BASE_URLS.get(source_name)
-        if not self.base_url:
-            raise ValueError(f"Unknown Bazos source: {source_name}")
+        self.base_url = None
 
         self.session = requests.Session()
         self.session.headers.update(
@@ -59,6 +50,11 @@ class BazosScraper(BaseScraper):
         if not url:
             self.logger.error("No URL or search parameters provided")
             return []
+
+        base_url_match = re.match(r"(https?://[^/]+)", url)
+        if base_url_match:
+            self.base_url = base_url_match.group(1)
+            self.logger.debug(f"Using base URL: {self.base_url}")
 
         max_pages = search_config.get("max_pages", 3)
 
