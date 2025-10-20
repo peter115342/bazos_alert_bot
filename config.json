@@ -8,6 +8,12 @@
       "source": "bazos_sk",
       "url": "https://auto.bazos.sk/fiat/?hledat=Panda&cenaod=2000&cenado=15000&order=4",
       "max_pages": 3
+    },
+    {
+      "name": "Twingo RS",
+      "source": "bazos_sk",
+      "url": "https://auto.bazos.sk/renualt/?hledat=Twingo+RS&cenaod=2000&cenado=15000&order=4",
+      "max_pages": 3
     }
   ]
 }
