@@ -1,0 +1,30 @@
+services:
+  bot:
+    build: .
+    container_name: auto_alert_bot_scheduled
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+      - ./config.json:/app/config.json:ro
+    environment:
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - RUN_MODE=once
+      - PYTHONUNBUFFERED=1
+      - TZ=Europe/Bratislava
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - |
+        apt-get update && apt-get install -y cron
+        #CRON SCHEDULE
+        echo "0 8,14,20 * * * cd /app && /root/.local/bin/uv run python -m src.main >> /app/data/cron.log 2>&1" > /etc/cron.d/bazos-scraper 
+        
+        chmod 0644 /etc/cron.d/bazos-scraper
+        
+        crontab /etc/cron.d/bazos-scraper
+        
+        touch /app/data/cron.log
+        
+        cd /app && uv run python -m src.main
+        
+        cron -f
