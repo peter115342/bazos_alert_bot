@@ -1,7 +1,7 @@
 import json
 import logging
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 
 logger = logging.getLogger(__name__)
@@ -28,20 +28,6 @@ class Config:
         except json.JSONDecodeError as e:
             logger.error(f"Invalid JSON in config file: {e}")
             raise
-
-    @property
-    def discord_webhook_url(self) -> Optional[str]:
-        """Get Discord webhook URL from config or environment."""
-        import os
-
-        return self.data.get("discord_webhook_url") or os.environ.get(
-            "DISCORD_WEBHOOK_URL"
-        )
-
-    @property
-    def check_interval_minutes(self) -> int:
-        """Get check interval in minutes."""
-        return self.data.get("check_interval_minutes", 15)
 
     @property
     def searches(self) -> List[Dict]:

@@ -1,6 +1,4 @@
 {
-  "discord_webhook_url": "",
-  "check_interval_minutes": 480,
   "database_path": "./data/listings.db",
   "searches": [
     {

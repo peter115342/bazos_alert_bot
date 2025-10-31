@@ -10,12 +10,14 @@ from .scrapers import BazosScraper, Listing
 
 logger = logging.getLogger(__name__)
 
+DEFAULT_INTERVAL_MINUTES = 60
+
 
 class AutoAlertBot:
     def __init__(self, config_path: str = "./config.json"):
         self.config = Config(config_path)
         self.database = ListingDatabase(self.config.database_path)
-        self.notifier = DiscordNotifier(self.config.discord_webhook_url)
+        self.notifier = DiscordNotifier()
         self.scrapers = {
             "bazos_sk": BazosScraper("bazos_sk"),
             "bazos_cz": BazosScraper("bazos_cz"),
@@ -122,12 +124,12 @@ class AutoAlertBot:
     def run_forever(self):
         """Run the bot continuously with configured interval."""
         logger.info(
-            f"Bot starting in continuous mode (interval: {self.config.check_interval_minutes} minutes)"
+            f"Bot starting in continuous mode (interval: {DEFAULT_INTERVAL_MINUTES} minutes)"
         )
 
         self.notifier.send_notification(
             title="🚀 Bot Started",
-            message=f"Auto Alert Bot is now running. Checking every {self.config.check_interval_minutes} minutes.",
+            message=f"Auto Alert Bot is now running. Checking every {DEFAULT_INTERVAL_MINUTES} minutes.",
             color=0x00FF00,
         )
 
@@ -135,10 +137,8 @@ class AutoAlertBot:
             try:
                 self.run_search_cycle()
 
-                sleep_seconds = self.config.check_interval_minutes * 60
-                logger.info(
-                    f"Sleeping for {self.config.check_interval_minutes} minutes"
-                )
+                sleep_seconds = DEFAULT_INTERVAL_MINUTES * 60
+                logger.info(f"Sleeping for {DEFAULT_INTERVAL_MINUTES} minutes")
                 time.sleep(sleep_seconds)
 
             except KeyboardInterrupt:
