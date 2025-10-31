@@ -1,4 +1,4 @@
-# Auto Alert Bot
+# Bazos Alert Bot
 
 Automated web scraper for Bazos.sk/cz that monitors listings and sends Discord notifications for new matches.
 
