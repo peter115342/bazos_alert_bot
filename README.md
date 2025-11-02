@@ -28,7 +28,6 @@ Create a `config.json` file in the project root based off the `config.example.js
       "price_min": 2000,
       "price_max": 15000,
       "max_pages": 3,
-      "order": "4"
     }
   ]
 }
@@ -72,9 +71,10 @@ or like this (preferred, because it only goes through the category in the URL):
 ### 2. Discord Webhook Setup
 
 1. Go to your Discord server settings
-2. Navigate to Integrations > Webhooks
-3. Click "New Webhook"
-4. Copy the webhook URL
+2. Create a channel
+3. Navigate to channel Edit Channel > Integrations > Webhooks
+4. Click "New Webhook"
+5. Copy the webhook URL
 
 ## Deployment Options
 
