@@ -34,6 +34,22 @@ Create a `config.json` file in the project root based off the `config.example.js
 }
 ```
 
+or like this (preferred, because it only goes through the category in the URL):
+
+```json
+{
+  "database_path": "./data/listings.db",
+  "searches": [
+    {
+      "name": "Macbook Air",
+      "source": "bazos_sk",
+      "url": "https://pc.bazos.sk/notebook/?hledat=MacBook+Air&rubriky=pc&hlokalita=81101&humkreis=45&cenaod=&cenado=&Submit=H%C4%BEada%C5%A5&order=&crp=&kitx=ano",
+      "max_pages": 3
+    }
+  ]
+}
+```
+
 #### Configuration Options
 
 - `database_path`: Path to SQLite database file (default: `./data/listings.db`)
@@ -45,11 +61,13 @@ Create a `config.json` file in the project root based off the `config.example.js
 
 - `name`: Descriptive name for this search
 - `source`: `bazos_sk` or `bazos_cz`
+- `url`: (optional - no need to use other search parameters with this) Full URL to a specific search
 - `search_term`: What to search for (e.g., "Panda", "A4")
 - `price_min`: Minimum price filter (optional)
 - `price_max`: Maximum price filter (optional)
 - `max_pages`: Maximum number of pages to scrape (default: 3)
-- `order`: Sort order - use `"4"` to sort by views (ascending)
+- `location`: Location to filter results (optional)
+- `radius`: Radius in kilometers to filter results (optional)
 
 ### 2. Discord Webhook Setup
 
