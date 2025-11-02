@@ -40,7 +40,7 @@
         {
       "name": "Macbook Air",
       "source": "bazos_sk",
-      "url": "https://pc.bazos.sk/notebooky/?hledat=Macbook+Air&cenaod=200&cenado=1900&order=4",
+      "url": "https://pc.bazos.sk/notebook/?hledat=Macbook+Air&cenaod=200&cenado=1900&order=4",
       "location": "Bratislava",
       "radius": "50",
       "max_pages": 3
