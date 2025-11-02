@@ -36,6 +36,14 @@
       "source": "bazos_sk",
       "url": "https://auto.bazos.sk/seat/?hledat=Exeo&cenaod=2000&cenado=15000&order=4",
       "max_pages": 3
+    },
+        {
+      "name": "Macbook Air",
+      "source": "bazos_sk",
+      "url": "https://pc.bazos.sk/notebooky/?hledat=Macbook+Air&cenaod=200&cenado=1900&order=4",
+      "location": "Bratislava",
+      "radius": "50",
+      "max_pages": 3
     }
   ]
 }
