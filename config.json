@@ -20,18 +20,6 @@
       "max_pages": 3
     },
     {
-      "name": "S25 Ultra 256GB",
-      "source": "bazos_sk",
-      "url": "https://mobil.bazos.sk/samsung/?hledat=S25+Ultra+256GB&cenaod=100&cenado=1500&order=4",
-      "max_pages": 3
-    },
-    {
-      "name": "Volvo S80",
-      "source": "bazos_sk",
-      "url": "https://auto.bazos.sk/volvo/?hledat=S80&cenaod=2000&cenado=15000&order=4",
-      "max_pages": 3
-    },
-    {
       "name": "Seat Exeo",
       "source": "bazos_sk",
       "url": "https://auto.bazos.sk/seat/?hledat=Exeo&cenaod=2000&cenado=15000&order=4",
