@@ -42,6 +42,12 @@
       "source": "bazos_sk",
       "url": "https://pc.bazos.sk/notebook/?hledat=MacBook+Air&rubriky=pc&hlokalita=81101&humkreis=45&cenaod=&cenado=&Submit=H%C4%BEada%C5%A5&order=&crp=&kitx=ano",
       "max_pages": 3
+    },
+    {
+      "name": "Alfa Romeo Mito",
+      "source": "bazos_sk",
+      "url": "https://auto.bazos.sk/alfa/?hledat=Mito&cenaod=2000&cenado=15000&order=4",
+      "max_pages": 3
     }
   ]
 }
