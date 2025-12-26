@@ -36,6 +36,12 @@
       "source": "bazos_sk",
       "url": "https://auto.bazos.sk/alfa/?hledat=Mito&cenaod=2000&cenado=15000&order=4",
       "max_pages": 3
+    },
+    {
+      "name": "Alfa Romeo Mito",
+      "source": "bazos_sk",
+      "url": "https://auto.bazos.sk/volkswagen/?hledat=Polo+GTI&cenaod=2000&cenado=15000&order=4",
+      "max_pages": 3
     }
   ]
 }
