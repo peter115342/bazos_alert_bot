@@ -1,7 +1,7 @@
 [project]
 name = "auto_alert_bot"
-version = "0.1.0"
-description = "A self-hosted bot to scrape and notify about vehicle listings from European sites."
+version = "1.0.0"
+description = "A self-hosted bot to scrape and notify about listings from Bazos."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { file = "LICENSE" }
