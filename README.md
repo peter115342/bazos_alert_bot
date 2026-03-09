@@ -121,8 +121,6 @@ cd auto_alert_bot
 ````bash
 echo "DISCORD_WEBHOOK_URL=your_webhook_url_here" > .env
 
-```bash
-DISCORD_WEBHOOK_URL=your_webhook_url_here
 ````
 
 ```bash
