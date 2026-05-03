@@ -36,6 +36,12 @@
       "source": "bazos_sk",
       "url": "https://auto.bazos.sk/volkswagen/?hledat=Polo+GTI&cenaod=2000&cenado=15000&order=4",
       "max_pages": 3
-    }
+    },
+    {
+      "name": "Toyota hybrid",
+      "source": "bazos_sk",
+      "url": "https://auto.bazos.sk/toyota/?hledat=hybrid&cenaod=7000&cenado=15000&order=4",
+      "max_pages": 3
+    },
   ]
 }
