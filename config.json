@@ -42,6 +42,12 @@
       "source": "bazos_sk",
       "url": "https://auto.bazos.sk/toyota/?hledat=hybrid&cenaod=7000&cenado=15000&order=4",
       "max_pages": 3
+    },
+    {
+      "name": "Swift Sport",
+      "source": "bazos_sk",
+      "url": "https://auto.bazos.sk/suzuki/?hledat=swift+sport&cenaod=6000&cenado=18000&order=4",
+      "max_pages": 3
     }
   ]
 }
