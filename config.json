@@ -48,6 +48,12 @@
       "source": "bazos_sk",
       "url": "https://auto.bazos.sk/suzuki/?hledat=swift+sport&cenaod=6000&cenado=18000&order=4",
       "max_pages": 3
+    },
+    {
+      "name": "Fiesta ST",
+      "source": "bazos_sk",
+      "url": "https://auto.bazos.sk/ford/?hledat=Fiesta+ST&cenaod=6000&cenado=18000&order=4",
+      "max_pages": 3
     }
   ]
 }
