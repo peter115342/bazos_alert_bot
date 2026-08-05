@@ -9,7 +9,7 @@ from pathlib import Path
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from src.scrapers.bazos import BazosScraper
+from scrapers.bazos import BazosScraper
 
 
 def setup_logging():

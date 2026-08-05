@@ -2,8 +2,8 @@
 
 import os
 import sqlite3
-from src.scrapers.bazos import BazosScraper
-from src.database import ListingDatabase
+from scrapers.bazos import BazosScraper
+from database import ListingDatabase
 
 # Setup
 os.makedirs("data", exist_ok=True)
