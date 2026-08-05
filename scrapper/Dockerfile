@@ -7,7 +7,7 @@ COPY uv.lock* ./
 
 RUN uv sync --frozen --no-cache
 
-COPY src/ ./src/
+COPY src ./src/
 
 RUN mkdir -p /app/data
 

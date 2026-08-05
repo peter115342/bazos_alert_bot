@@ -8,9 +8,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from src.config import Config
-from src.database import ListingDatabase
-from src.scrapers.bazos import BazosScraper
+from database import ListingDatabase
+from scrapers.bazos import BazosScraper
 
 
 def setup_logging():

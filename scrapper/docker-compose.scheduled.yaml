@@ -1,6 +1,6 @@
 services:
   bot:
-    build: .
+    build: ..
     container_name: auto_alert_bot_scheduled
     restart: unless-stopped
     volumes:
