@@ -6,10 +6,15 @@ Usage (run from the scrapper/ project root):
 """
 
 import psycopg2.extras
+import sys
+from pathlib import Path
 
 from src.db.connect import get_connection
 from src.scrapers import BazosScraper
 
+# todo meanwhile, Add the project root (parent of scripts/) to Python's import path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
 def fetch_active_searches(cur):
     """Return all active search rows from the DB."""
