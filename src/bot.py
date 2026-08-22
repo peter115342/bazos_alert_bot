@@ -6,6 +6,7 @@ from .config import Config
 from .database import ListingDatabase
 from .notifier import DiscordNotifier
 from .scrapers import BazosScraper, Listing
+from .ai_evaluator import AIEvaluator
 
 
 logger = logging.getLogger(__name__)
@@ -18,6 +19,7 @@ class AutoAlertBot:
         self.config = Config(config_path)
         self.database = ListingDatabase(self.config.database_path)
         self.notifier = DiscordNotifier()
+        self.ai_evaluator = AIEvaluator()          # ← nový řádek
         self.scrapers = {
             "bazos_sk": BazosScraper("bazos_sk"),
             "bazos_cz": BazosScraper("bazos_cz"),
@@ -25,11 +27,6 @@ class AutoAlertBot:
         logger.info("AutoAlertBot initialized")
 
     def process_listings(self, listings: List[Listing]):
-        """Process scraped listings and send notifications for new ones.
-
-        Args:
-            listings: List of Listing objects to process
-        """
         new_count = 0
 
         for listing in listings:
@@ -50,26 +47,45 @@ class AutoAlertBot:
             else:
                 self.database.update_last_checked(listing.listing_id, listing.source)
 
-            if not self.database.is_listing_notified(
-                listing.listing_id, listing.source
-            ):
-                self.notifier.send_vehicle_notification(
+            if not self.database.is_listing_notified(listing.listing_id, listing.source):
+                # ========== AI FILTR ==========
+                should_notify, reason, discount = self.ai_evaluator.evaluate_deal(
                     title=listing.title,
-                    url=listing.url,
-                    price=listing.price,
-                    year=listing.year,
-                    mileage=listing.mileage,
-                    location=listing.location,
-                    image_url=listing.image_url,
-                    description=listing.description,
-                    color=0xF16400,
+                    price_str=listing.price or "",
+                    description=listing.description or "",
+                    location=listing.location or "",
                 )
-                self.database.mark_as_notified(listing.listing_id, listing.source)
-                new_count += 1
-                logger.info(f"New listing notified: {listing.title}")
+
+                if should_notify:
+                    # Přidej AI info do notifikace
+                    extra_desc = f"**AI hodnocení:** {reason}"
+                    if discount is not None:
+                        extra_desc += f"\n**Sleva:** {discount:.1f} %"
+
+                    full_description = (listing.description or "") + "\n\n" + extra_desc
+
+                    self.notifier.send_vehicle_notification(
+                        title=listing.title,
+                        url=listing.url,
+                        price=listing.price,
+                        year=getattr(listing, "year", None),
+                        mileage=getattr(listing, "mileage", None),
+                        location=listing.location,
+                        image_url=listing.image_url,
+                        description=full_description,
+                        color=0x00FF00,  # zelená = dobrý deal
+                    )
+                    self.database.mark_as_notified(listing.listing_id, listing.source)
+                    new_count += 1
+                    logger.info(f"GOOD DEAL notified: {listing.title} ({reason})")
+                else:
+                    # I když neposíláme, označíme jako notified, ať to nezkouší znovu
+                    self.database.mark_as_notified(listing.listing_id, listing.source)
+                    logger.info(f"Skipped (not good enough): {listing.title} – {reason}")
+                # ==============================
 
         if new_count > 0:
-            logger.info(f"Processed {len(listings)} listings, {new_count} were new")
+            logger.info(f"Notified {new_count} good deals")
         else:
             logger.debug(f"Processed {len(listings)} listings, no new ones found")
 
