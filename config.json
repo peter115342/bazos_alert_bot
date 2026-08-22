@@ -2,52 +2,32 @@
   "database_path": "./data/listings.db",
   "searches": [
     {
-      "name": "Fiat Panda",
-      "source": "bazos_sk",
-      "url": "https://auto.bazos.sk/fiat/?hledat=Panda&cenaod=2000&cenado=15000&order=4",
-      "max_pages": 3
+      "name": "iPhone Ostrava",
+      "source": "bazos_cz",
+      "url": "https://mobil.bazos.cz/inzeraty/iphone/ostrava/",
+      "max_pages": 2
     },
     {
-      "name": "Seat Exeo",
-      "source": "bazos_sk",
-      "url": "https://auto.bazos.sk/seat/?hledat=Exeo&cenaod=2000&cenado=15000&order=4",
-      "max_pages": 3
+      "name": "Samsung + AirPods",
+      "source": "bazos_cz",
+      "search_term": "samsung OR airpods OR galaxy",
+      "price_min": 500,
+      "price_max": 15000,
+      "max_pages": 2
     },
     {
-      "name": "Macbook Air",
-      "source": "bazos_sk",
-      "url": "https://pc.bazos.sk/notebook/?hledat=MacBook+Air&rubriky=pc&hlokalita=81101&humkreis=45&cenaod=&cenado=&Submit=H%C4%BEada%C5%A5&order=&crp=&kitx=ano",
-      "max_pages": 3
+      "name": "Notebooky",
+      "source": "bazos_cz",
+      "url": "https://pc.bazos.cz/notebook/",
+      "max_pages": 2
     },
     {
-      "name": "Alfa Romeo Mito",
-      "source": "bazos_sk",
-      "url": "https://auto.bazos.sk/alfa/?hledat=Mito&cenaod=2000&cenado=15000&order=4",
-      "max_pages": 3
-    },
-    {
-      "name": "Alfa Romeo Mito",
-      "source": "bazos_sk",
-      "url": "https://auto.bazos.sk/volkswagen/?hledat=Polo+GTI&cenaod=2000&cenado=15000&order=4",
-      "max_pages": 3
-    },
-    {
-      "name": "Toyota hybrid",
-      "source": "bazos_sk",
-      "url": "https://auto.bazos.sk/toyota/?hledat=hybrid&cenaod=7000&cenado=15000&order=4",
-      "max_pages": 3
-    },
-    {
-      "name": "Swift Sport",
-      "source": "bazos_sk",
-      "url": "https://auto.bazos.sk/suzuki/?hledat=swift+sport&cenaod=6000&cenado=18000&order=4",
-      "max_pages": 3
-    },
-    {
-      "name": "Fiesta ST",
-      "source": "bazos_sk",
-      "url": "https://auto.bazos.sk/ford/?hledat=Fiesta+ST&cenaod=6000&cenado=18000&order=4",
-      "max_pages": 3
+      "name": "Šperky stříbro/zlato",
+      "source": "bazos_cz",
+      "search_term": "stříbrný OR stříbro OR zlatý náramek OR prsten",
+      "price_min": 200,
+      "price_max": 8000,
+      "max_pages": 2
     }
   ]
 }
